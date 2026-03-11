@@ -10,12 +10,21 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 
-app.get('/', async (req, res) => {
-    res.status(200).json({ 
-        message: 'Express server is healthy. Postgres database connection is healthy.',
-        server: 'up',
-        database: 'up'
-    });
+app.get('/health', async (req, res) => {
+    const db_status = await dbHealth();
+    if (db_status) {
+        res.status(200).json({ 
+            message: 'Express server is healthy. Postgres database connection is healthy.',
+            server: 'up',
+            database: 'up'
+        });
+    } else {
+        res.status(500).json({ 
+            message: 'Express server is healthy. Postgres database connection is down.',
+            server: 'up',
+            database: 'down'
+        });
+    }
 });
 
 app.listen(PORT, '127.0.0.1', () => {
