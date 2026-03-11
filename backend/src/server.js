@@ -7,10 +7,9 @@ const app = express();
 const PORT = process.env.PORT;
 
 // Middleware for checking database health
-const dbHealth = async (req, res, next) => {
+const dbHealth = async (req, res) => {
     try {
         await pool.query('SELECT 1');
-        next();
     } catch (error) {
         res.status(503).json({ 
             message: 'Express server is healthy. Postgres database connection is down.',
