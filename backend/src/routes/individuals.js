@@ -23,6 +23,12 @@ router.post('/', async (req, res) => {
             });
         };
 
+        if (!scientist_tracking || typeof(scientist_tracking || scientist_tracking.lenght <= 3) !== 'string') {
+            return res.status(400).json({
+                error: "Your first and last name is required, must be a string, and more than 3 characters!"
+            });
+        };
+
         const result = await pool.query(
             `INSERT INTO individuals (nick_name, scientist_tracking, species_id)
             VALUES ($1, $2, $3)
