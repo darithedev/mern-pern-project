@@ -35,6 +35,12 @@ router.post('/', async (req, res) => {
             });
         };
 
+        if (!location || location.length <= 3) {
+            return res.status(400).json({
+                error: "A sighting location is required and be more than 3 characters!"
+            });
+        };
+
         const result = await pool.query(
             `INSERT INTO individuals (sighting, individual_id, location, healthy, sighted_by_email)
             VALUES ($1, $2, $3, $4, $5)
