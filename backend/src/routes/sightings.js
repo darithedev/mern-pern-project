@@ -17,6 +17,18 @@ router.post('/', async (req, res) => {
     try {
         const { sighting, individual_id, location, healthy, sighted_by_email } = req.body;
 
+        if (!sighting || new Date(sighting).toString() === 'Invalid Date') {
+            return res.status(400).json({
+                error: "A valid date is required!"
+            });
+        };
+
+        if (new Date(sighting) > new Date() ) {
+            return res.status(400).json({
+                error: "Date cannot be in the future!"
+            });
+        };
+
         const result = await pool.query(
             `INSERT INTO individuals (sighting, individual_id, location, healthy, sighted_by_email)
             VALUES ($1, $2, $3, $4, $5)
