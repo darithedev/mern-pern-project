@@ -126,6 +126,6 @@ router.delete('/:id', async (req, res) => {
         console.error('Could not locate or delete this sighting.', error.message);
         res.status(500).json({ error: "Error! With locating or deleting this sighting!"});
     }
-})
+});
 
 export default router;
