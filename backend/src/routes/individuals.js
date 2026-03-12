@@ -17,6 +17,12 @@ router.post('/', async (req, res) => {
     try {
         const { nick_name, scientist_tracking, species_id } = req.body;
 
+        if (!nick_name || nick_name.length <= 3) {
+            return res.status(400).json({
+                error: "A nickname for this endangered animal is required and must be more than 3 characters!"
+            });
+        };
+
         const result = await pool.query(
             `INSERT INTO individuals (nick_name, scientist_tracking, species_id)
             VALUES ($1, $2, $3)
