@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
             });
         };
 
-        if (!healthy || typeof(healthy) !== 'boolean') {
+        if (typeof(healthy) !== 'boolean') {
             return res.status(400).json({
                 error: "Healthy status is required!"
             });
