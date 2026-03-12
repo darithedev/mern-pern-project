@@ -7,6 +7,12 @@ router.get('/', async (req, res) => {
     try {
         const { start, end } = req.query;
 
+        if ((!start && end) || (start && !end)) {
+            return res.status(400).json({
+                error: "A start and end date are required!"
+            });
+        };
+
         let sightingsQuery = `
             SELECT sightings.*, individuals.nick_name 
             FROM sightings
