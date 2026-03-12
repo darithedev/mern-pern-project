@@ -29,6 +29,12 @@ router.post('/', async (req, res) => {
             });
         };
 
+        if (!individual_id || isNaN(individual_id)) {
+            return res.status(400).json({
+                error: "Individual id is required and must be an integer!"
+            });
+        };
+
         const result = await pool.query(
             `INSERT INTO individuals (sighting, individual_id, location, healthy, sighted_by_email)
             VALUES ($1, $2, $3, $4, $5)
