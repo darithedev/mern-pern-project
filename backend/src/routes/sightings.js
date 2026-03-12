@@ -94,9 +94,37 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
+        const { id } = req.params;
+
+        // deleted_sighting is a temporary result set for the deleted sighting
+        // and is joined with the individuals table to access the individual animal's nick_name
+        // This result set only exists in memory and will not be accessible after query ends
+        const result = await pool.query(
+            `WITH deleted_sighting AS (
+                DELETE FROM sightings
+                WHERE id=$1 
+                RETURNING *
+            )
+            SELECT deleted_sighting.*, individuals.nick_name
+            FROM deleted_sighting
+            JOIN individuals 
+            ON deleted_sighting.individual_id = individuals.id`,
+            [id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ 
+                error: "This sighting could not be deleted because it was not located!"
+            });
+        };
+
+        res.status(201).json({ 
+            message: `The sighting for ${result.rows[0].nick_name} on date, ${result.rows[0].sighting.toDateString()} has been deleted.`
+        });
 
     } catch (error) {
-        
+        console.error('Could not locate or delete this sighting.', error.message);
+        res.status(500).json({ error: "Error! With locating or deleting this sighting!"});
     }
 })
 
