@@ -23,9 +23,9 @@ router.post('/', async (req, res) => {
             });
         };
 
-        if (!scientist_tracking || typeof(scientist_tracking || scientist_tracking.lenght <= 3) !== 'string') {
+        if (!scientist_tracking || typeof(scientist_tracking) !== 'string' || scientist_tracking.length <= 3) {
             return res.status(400).json({
-                error: "Your first and last name is required, must be a string, and more than 3 characters!"
+                error: "Your first and last name is required, must be a string, and be more than 3 characters!"
             });
         };
 
