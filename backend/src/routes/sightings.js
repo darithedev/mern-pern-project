@@ -13,4 +13,21 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.post('/', async (req, res) => {
+    try {
+        const { sighting, individual_id, location, healthy, sighted_by_email } = req.body;
+
+        const result = await pool.query(
+            `INSERT INTO individuals (sighting, individual_id, location, healthy, sighted_by_email)
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING *`,
+            [sighting, individual_id, location, healthy, sighted_by_email]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error('Error with adding individual endangered animal.', error.message);
+        res.status(500).json({ error: 'Error! Could not add individual endangered animal.' });
+    }
+});
+
 export default router;
