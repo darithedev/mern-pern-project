@@ -13,9 +13,35 @@ router.get('/', async (req, res) => {
     }
 });
 
+// This likely will be admin route only where admin can add an endangered species / auth protected route
 router.post('/', async (req, res) => {
     try {
         const { common_name, scientific_name, estimated_in_the_wild, conservation_code } = req.body;
+
+        if (!common_name){
+            return res.status(400).json({
+                error: "A common name for this endangered animal is required!"
+            });
+        }
+
+        if (!scientific_name) {
+            return res.status(400).json({
+                error: "A scientific name for this endangered animal is required!"
+            });
+        }
+
+        if (!estimated_in_the_wild || typeof(estimated_in_the_wild) !== 'number') {
+            return res.status(400).json({
+                error: "Estimated amount must be an integer!"
+            });
+        };
+
+        if (!conservation_code || conservation_code.length !== 2) {
+            return res.status(400).json({
+                error: "A 2 character conservation code for this endangered animal is required!"
+            });
+        }
+
         const result = await pool.query(
             `INSERT INTO species (common_name, scientific_name, estimated_in_the_wild, conservation_code)
             VALUES ($1, $2, $3, $4)
