@@ -66,4 +66,30 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { sighting, individual_id, location, healthy, sighted_by_email } = req.body;
+
+        const result = await pool.query(
+            `UPDATE sightings 
+            SET sighting=$1, individual_id=$2, location=$3, healthy=$4, sighted_by_email=$5
+            WHERE id=$6
+            RETURNING *`,
+            [sighting, individual_id, location, healthy, sighted_by_email, id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ 
+                error: "This sighting could not be edited because it was not located!"
+            });
+        };
+
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error('This sighting could not be located or edited!', error.message)
+        res.status(500).json({ error: "Error! this sigting could not be located or edited!"})
+    }
+});
+
 export default router;
