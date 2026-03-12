@@ -29,6 +29,12 @@ router.post('/', async (req, res) => {
             });
         };
 
+        if (!species_id || isNaN(species_id)) {
+            return res.status(400).json({
+                error: "Species id is required and must be an integer!"
+            });
+        };
+
         const result = await pool.query(
             `INSERT INTO individuals (nick_name, scientist_tracking, species_id)
             VALUES ($1, $2, $3)
