@@ -7,9 +7,9 @@
 -- psql endangeredspeciesdb < seed_data.sql
 
 -- this will reset the table if you want to re-seed the database
-DROP TABLE IF EXISTS species CASCADE;
-DROP TABLE IF EXISTS individuals CASCADE;
-DROP TABLE IF EXISTS sightings CASCADE;
+-- DROP TABLE IF EXISTS individuals CASCADE;
+-- DROP TABLE IF EXISTS sightings CASCADE;
+-- DROP TABLE IF EXISTS species CASCADE;
 
 -- create species table
 CREATE TABLE IF NOT EXISTS species (
