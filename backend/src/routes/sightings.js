@@ -5,7 +5,22 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const result = await pool.query(`SELECT * FROM sightings`);
+        const { start, end } = req.query;
+
+        let sightingsQuery = `
+            SELECT sightings.*, individuals.nick_name 
+            FROM sightings
+            JOIN individuals 
+            ON sightings.individual_id = individuals.id
+        `;
+        let reqQuery = [];
+
+        if (start && end) {
+            sightingsQuery += `WHERE sightings.sighting BETWEEN $1 AND $2`;
+            reqQuery = [start, end];
+        }
+
+        const result = await pool.query(sightingsQuery, reqQuery);
         res.status(200).json(result.rows);
     } catch (error) {
         console.error('Error with getting all sightings.', error);
