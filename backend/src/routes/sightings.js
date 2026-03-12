@@ -41,6 +41,12 @@ router.post('/', async (req, res) => {
             });
         };
 
+        if (!healthy || typeof(healthy) !== 'boolean') {
+            return res.status(400).json({
+                error: "Healthy status is required!"
+            });
+        };
+
         const result = await pool.query(
             `INSERT INTO individuals (sighting, individual_id, location, healthy, sighted_by_email)
             VALUES ($1, $2, $3, $4, $5)
