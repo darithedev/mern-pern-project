@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
         }
 
         const result = await pool.query(
-            `INSERT INTO individuals (sighting, individual_id, location, healthy, sighted_by_email)
+            `INSERT INTO sightings (sighting, individual_id, location, healthy, sighted_by_email)
             VALUES ($1, $2, $3, $4, $5)
             RETURNING *`,
             [sighting, individual_id, location, healthy, sighted_by_email]
