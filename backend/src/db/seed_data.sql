@@ -7,9 +7,9 @@
 -- psql endangeredspeciesdb < seed_data.sql
 
 -- this will reset the table if you want to re-seed the database
--- DROP TABLE IF EXISTS species;
--- DROP TABLE IF EXISTS individuals;
--- DROP TABLE IF EXISTS sightings;
+DROP TABLE IF EXISTS species CASCADE;
+DROP TABLE IF EXISTS individuals CASCADE;
+DROP TABLE IF EXISTS sightings CASCADE;
 
 -- create species table
 CREATE TABLE IF NOT EXISTS species (
@@ -56,22 +56,27 @@ INSERT INTO species (common_name, scientific_name, estimated_in_the_wild, conser
 -- load data to individuals table
 INSERT INTO individuals (nick_name, scientist_tracking, species_id) VALUES
     ('Bluey', 'Dari Cares', 1),
+    ('Blue Ladt', 'Dari Cares', 1),
     ('Red Red', 'Dari Cares', 2),
+    ('Big Red', 'Dari Cares', 2),
     ('Andy the Kitty', 'Dari Cares', 3),
+    ('Sharon', 'Dari Cares', 3),
     ('Waii the turtle', 'Dari Cares', 4),
+    ('Topsy Turn', 'Dari Cares', 4),
+    ('Cranzy', 'Dari Cares', 5),
     ('Hoodie', 'Dari Cares', 5)
 ;
 
 -- load data to sightings table
 INSERT INTO sightings (sighting, individual_id, location, healthy, sighted_by_email) VALUES
     ('2026-03-10T01:00:48.389Z', 1,  'Savanna', true, 'dari@example.com'),
-    ('2026-02-10T01:00:48.389Z', 1, 'Forest', true, 'dari@example.com'),
-    ('2026-02-11T01:00:48.389Z', 2, 'Shrubland', true, 'dari@example.com'),
-    ('2026-02-15T01:00:48.389Z', 2, 'Wetlands', true, 'dari@example.com'),
-    ('2026-02-17T01:00:48.389Z', 3, 'Inland Cliffs', false, 'dari@example.com'),
-    ('2026-01-10T01:00:48.389Z', 3, 'Inland Cliffs', true, 'dari@example.com'),
-    ('2026-02-10T01:00:48.389Z', 4, 'Forest', true, 'dari@example.com'),
-    ('2026-02-11T01:00:48.389Z', 4, 'Forest', true, 'dari@example.com'),
-    ('2026-02-19T01:00:48.389Z', 5, 'Marine Neritic', false, 'dari@example.com'),
-    ('2026-02-11T01:00:48.389Z', 5, 'Marine Neritic', false, 'dari@example.com')
+    ('2026-02-10T01:00:48.389Z', 2, 'Forest', true, 'dari@example.com'),
+    ('2026-02-11T01:00:48.389Z', 3, 'Shrubland', true, 'dari@example.com'),
+    ('2026-02-15T01:00:48.389Z', 4, 'Wetlands', true, 'dari@example.com'),
+    ('2026-02-17T01:00:48.389Z', 5, 'Inland Cliffs', false, 'dari@example.com'),
+    ('2026-01-10T01:00:48.389Z', 6, 'Inland Cliffs', true, 'dari@example.com'),
+    ('2026-02-10T01:00:48.389Z', 7, 'Forest', true, 'dari@example.com'),
+    ('2026-02-11T01:00:48.389Z', 8, 'Forest', true, 'dari@example.com'),
+    ('2026-02-19T01:00:48.389Z', 9, 'Marine Neritic', false, 'dari@example.com'),
+    ('2026-02-11T01:00:48.389Z', 10, 'Marine Neritic', false, 'dari@example.com')
 ;
