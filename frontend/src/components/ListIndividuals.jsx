@@ -3,7 +3,7 @@ import './ListIndividuals.css'
 import IndividualForm from './IndividualForm.jsx';
 import SightingForm from './SightingForm.jsx'
 
-const ListIndividuals = ({ updateScreen, speciesId, speciesName, setIndividualsSightings }) => {
+const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
     const [screen, setScreen] = useState("individuals");
     const [individuals, setIndividuals] = useState([]);
     const [filteredIndivs, setFilteredIndivs] = useState([]);
