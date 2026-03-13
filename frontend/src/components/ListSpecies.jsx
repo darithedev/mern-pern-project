@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const ListSpecies = () => {
     const [species, setSpecies] = useState([]);
@@ -7,9 +7,13 @@ const ListSpecies = () => {
         fetch("http://localhost:8080/api/species")
         .then((response) => response.json())
         .then((endangeredSpecies) => {
-          setIndividuals(endangeredSpecies);
+          setSpecies(endangeredSpecies);
         });
     };
+
+    useEffect(() => {
+        fetchSpecies();
+    }, []);
 
     return (
         <div className="species-container">
