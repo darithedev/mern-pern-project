@@ -34,6 +34,6 @@ app.listen(PORT, '127.0.0.1', async () => {
         console.log(`Express server is running on port ${PORT}`);
     } else {
         console.error('Error! The database is down. Restart database and server.');
-        process.exit(0);
+        process.exit(1);
     }
 });
