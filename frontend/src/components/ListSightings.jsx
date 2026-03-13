@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import './ListSightings.css'
 
 const ListSightings = ({ updateScreen }) => {
     const [sightings, setSightings] = useState([]);
