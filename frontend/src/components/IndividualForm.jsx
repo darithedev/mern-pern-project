@@ -27,6 +27,28 @@ const IndividualForm = ({ setScreen, speciesId, speciesName, fetchIndividuals })
         setScreen("individuals");
     }
 
+    const postIndividual = (newIndividual) => {
+        return fetch("http://localhost:8080/api/individuals", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newIndividual)
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then(() => {
+            clearForm();
+            fetchIndividuals();
+            goBack();
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        postIndividual(individual);
+        setScreen("individuals");
+    }
+
     return (
         <Form 
             className="form-individual"
