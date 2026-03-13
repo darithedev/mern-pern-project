@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const ListIndividuals = () => {
     const [individuals, setIndividuals] = useState([]);
@@ -12,13 +12,18 @@ const ListIndividuals = () => {
         });
     };
 
-    const fetchSightings = () => {
+    // Likely ot be moved to its own component ListSighting.jsx
+    /*const fetchSightings = () => {
         fetch("http://localhost:8080/api/sightings")
         .then((response) => response.json())
         .then((individualSightings) => {
           setSightings(individualSightings);
         });
-    };
+    };*/
+
+    useEffect(() => {
+        fetchIndividuals();
+    }, []);
     
     return (
         <div className="individual-container">
