@@ -11,6 +11,14 @@ const ListIndividuals = () => {
           setIndividuals(individualAnimals);
         });
     };
+
+    const fetchSightings = () => {
+        fetch("http://localhost:8080/api/sightings")
+        .then((response) => response.json())
+        .then((individualSightings) => {
+          setSightings(individualSightings);
+        });
+    };
     
     return (
         <div className="individual-container">
