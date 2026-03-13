@@ -54,7 +54,50 @@ const IndividualForm = ({ setScreen, speciesId, speciesName, fetchIndividuals })
             className="form-individual"
             onSubmit={handleSubmit}
         >
-            
+            <h2>Add Individual Animal Form</h2>
+            <Form.Group>
+                <Form.Label>Species: </Form.Label>
+                <input
+                    id="species-input-readonly"
+                    type="text"
+                    required
+                    value={speciesName}
+                    readOnly={true}
+                />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Given Nick Name: </Form.Label>
+                <input
+                    type="text"
+                    id="nick-name-input"
+                    placeholder="Cutie pie"
+                    required
+                    value={individual.nick_name}
+                    onChange={handleNickname}
+                />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Your Name: </Form.Label>
+                <input
+                    type="text"
+                    id="scientist-name-input"
+                    placeholder="Dari Cares"
+                    required
+                    value={individual.scientist_tracking}
+                    onChange={handleScientistTracking}
+                />
+            </Form.Group>
+            <Form.Group>
+                <Button type="submit" variant="outline-sucess">
+                    Submit
+                </Button>
+                <Button type="button" variant="outline=warning" onClick={clearForm}>
+                    Reset
+                </Button>
+                <Button type="button" variant="outline=warning" onClick={goBack}>
+                    Back
+                </Button>
+            </Form.Group>
         </Form>
     )
 
