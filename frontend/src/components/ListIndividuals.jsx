@@ -62,6 +62,7 @@ const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
                     setScreen={setScreen}
                     speciesId={speciesId}
                     speciesName={speciesName}
+                    fetchIndividuals={fetchIndividuals}
                 />
             )}
         </>
