@@ -4,13 +4,36 @@ import * as IoIcons from 'react-icons/io5'
 
 const ListSightings = ({ updateScreen }) => {
     const [sightings, setSightings] = useState([]);
-    const [editingSighting, setEditingStghting] = useState(null);
 
     const fetchSightings = () => {
       fetch("http://localhost:8080/api/sightings")
         .then((response) => response.json())
         .then((individualSightings) => {
           setSightings(individualSightings);
+        });
+    };
+
+    const putSighting = (sighting) => {
+        return fetch(`http://localhost:8080/api/sightings/${sighting.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(toEditEvent)
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            clearForm();
+        });
+    };
+
+    const onDelete = (sightingId) => {
+        return fetch(`http://localhost:8080/api/sightings/${sightingId}`, {
+            method: "DELETE"
+        }).then((response) => {
+            if (response.ok) {
+                fetchSightings();
+            }
         });
     };
 
@@ -37,7 +60,7 @@ const ListSightings = ({ updateScreen }) => {
                                 <IoIcons.IoTrash />
                             </button>
                             <button
-                                onClick={() => onEdit(sighting.id)}
+                                onClick={() => alert("Editing feature is coming soon!")}
                                 style={{ padding: "0.6em" }}
                             >
                                 <IoIcons.IoSync />
