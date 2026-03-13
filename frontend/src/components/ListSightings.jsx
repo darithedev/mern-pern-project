@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './ListSightings.css'
+import * as IoIcons from 'react-icons/io5'
 
 const ListSightings = ({ updateScreen }) => {
     const [sightings, setSightings] = useState([]);
@@ -29,6 +30,18 @@ const ListSightings = ({ updateScreen }) => {
                             <p>Location: {sighting.location}</p>
                             <p>Health: {sighting.healthy ? "Healthy" : "Not Healthy"}</p>
                             <p>Contact of Person Tracking: {sighting.sighted_by_email}</p>
+                            <button
+                                onClick={() => onDelete(sighting.id)}
+                                style={{ padding: "0.6em", marginRight: "0.9em" }}
+                            >
+                                <IoIcons.IoTrash />
+                            </button>
+                            <button
+                                onClick={() => onEdit(sighting.id)}
+                                style={{ padding: "0.6em" }}
+                            >
+                                <IoIcons.IoSync />
+                            </button>
                         </li>
                     );
                 })}
