@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    list-style: none;
 }
 
 .species-card li {
@@ -9,4 +10,10 @@
     border-radius: 12px;
     padding: 15px;
     margin-bottom: 10px;
+}
+
+.species-card li:hover {
+    transform: scale(1.04);
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
