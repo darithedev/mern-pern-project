@@ -92,6 +92,42 @@ router.put('/:id', async (req, res) => {
         const { id } = req.params;
         const { sighting, individual_id, location, healthy, sighted_by_email } = req.body;
 
+        if (!sighting || new Date(sighting).toString() === 'Invalid Date') {
+            return res.status(400).json({
+                error: "A valid date is required!"
+            });
+        };
+
+        if (new Date(sighting) > new Date() ) {
+            return res.status(400).json({
+                error: "Date cannot be in the future!"
+            });
+        };
+
+        if (!individual_id || isNaN(individual_id)) {
+            return res.status(400).json({
+                error: "Individual id is required and must be an integer!"
+            });
+        };
+
+        if (!location || location.length <= 3) {
+            return res.status(400).json({
+                error: "A sighting location is required and be more than 3 characters!"
+            });
+        };
+
+        if (typeof(healthy) !== 'boolean') {
+            return res.status(400).json({
+                error: "Healthy status is required!"
+            });
+        };
+
+        if (!sighted_by_email || !sighted_by_email.includes('@')) {
+            return res.status(400).json({
+                error: "A valid email is required!"
+            })
+        }
+
         const result = await pool.query(
             `UPDATE sightings 
             SET sighting=$1, individual_id=$2, location=$3, healthy=$4, sighted_by_email=$5
