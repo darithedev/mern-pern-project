@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './ListSPecies.css'
+import ListIndividuals from './ListIndividuals.jsx';
 
 const ListSpecies = () => {
     const [screen, setScreen] = useState("species");
@@ -25,7 +26,7 @@ const ListSpecies = () => {
     };
 
     const [selectedSpecie, setSelectedSpecie] = useState();
-    const onClickSpecies = (specie) => {
+    const onClickSpecie = (specie) => {
         setSelectedSpecie(specie);
         setScreen("individuals");
     };
@@ -42,7 +43,7 @@ const ListSpecies = () => {
                     <ul className="species-card">
                         {species.map((specie) => {
                             return (
-                                <li key={specie.id} onClick={() => onClickSpecies(specie)}>
+                                <li key={specie.id} onClick={() => onClickSpecie(specie)}>
                                     <h3>{specie.common_name}</h3>
                                     <p style={{ fontStyle: "italic" }}>{specie.scientific_name}</p>
                                     <p>Estimated Mature Individuals: {specie.estimated_in_the_wild}</p>
@@ -51,6 +52,14 @@ const ListSpecies = () => {
                             )
                         })}
                     </ul>
+                </div>
+            )}
+
+            {screen === "individuals" && (
+                <div>
+                    <ListIndividuals 
+                        speciesId={selectedSpecie.id} 
+                    />
                 </div>
             )}
         </>
