@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './ListIndividuals.css'
 
-const ListIndividuals = ({ speciesId }) => {
+const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
     const [screen, setScreen] = useState("individuals");
     const [individuals, setIndividuals] = useState([]);
     const [filteredIndivs, setFilteredIndivs] = useState([]);
@@ -51,6 +51,7 @@ const ListIndividuals = ({ speciesId }) => {
                             })}
                         </ul>
                         <button id="add-button" onClick={() => setScreen("add")}>Add Individual</button>
+                        <button onClick={() => updateScreen("species")}>Back</button>
                     </div>
                 </div>
             )};
