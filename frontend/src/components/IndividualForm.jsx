@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const IndividualForm = ({ setScreen, speciesId, speciesName }) => {
+const IndividualForm = ({ setScreen, speciesId, speciesName, fetchIndividuals }) => {
     
     const [individual, setIndividual] = useState({
         nick_name: "",
