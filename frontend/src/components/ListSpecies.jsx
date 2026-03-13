@@ -6,7 +6,7 @@ import ListSightings from './ListSightings.jsx';
 const ListSpecies = () => {
     const [screen, setScreen] = useState("species");
     const [species, setSpecies] = useState([]);
-    
+
     const codes = [
         { code: "EX", label: "Extinct" },
         { code: "EW", label: "Extinct in the Wild" },
@@ -42,6 +42,7 @@ const ListSpecies = () => {
             {screen === "species" && (
                 <div className="species-container">
                     <h2>Endangered Species</h2>
+                    <p>Click an endangered species to view individuals and add a sighting for that species.</p>
                     <ul className="species-card">
                         {species.map((specie) => {
                             return (
