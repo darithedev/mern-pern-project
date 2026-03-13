@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import './ListIndividuals.css'
 
 const ListIndividuals = ({ speciesId }) => {
     const [individuals, setIndividuals] = useState([]);
