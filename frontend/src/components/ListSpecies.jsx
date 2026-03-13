@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './ListSPecies.css'
 
 const ListSpecies = () => {
+    const [screen, setScreen] = useState("species");
     const [species, setSpecies] = useState([]);
     const codes = [
         { code: "EX", label: "Extinct" },
