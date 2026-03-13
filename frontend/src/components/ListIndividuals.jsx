@@ -30,7 +30,23 @@ const ListIndividuals = ({ speciesId }) => {
     
     return (
         <div className="individual-container">
-            <p>Hello List Individuals</p>
+            <div className="list-individuals">
+                <h2>Endangered Animals Tracked</h2>
+                {/*<ListSightings /> this is the search bar where date start - end is filtered*/}
+                <ul className="individual-card">
+                    {filteredIndivs.map((individual) => {
+                        return (
+                            <li key={individual.id}>
+                                <h3>{individual.nick_name}</h3>
+                                <p>Tracked by: {individual.scientist_tracking}</p>
+                                <p>Total Sightings: {individual.sighting_count}</p>
+                                <p>First Sighting: {individual.first_sighting}</p>
+                                <p>Last Sighting: {individual.last_sighting}</p>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
         </div>
     )
 }
