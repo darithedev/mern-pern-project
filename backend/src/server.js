@@ -29,6 +29,11 @@ app.get('/health', async (req, res) => {
     }
 });
 
-app.listen(PORT, '127.0.0.1', () => {
-    console.log(`Express server is running on port ${PORT}`);
+app.listen(PORT, '127.0.0.1', async () => {
+    if (await dbHealth()) {
+        console.log(`Express server is running on port ${PORT}`);
+    } else {
+        console.error('Error! The database is down. Restart database and server.');
+        process.exit(0);
+    }
 });
