@@ -5,7 +5,15 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const result = await pool.query(`SELECT * FROM individuals`);
+        const result = await pool.query(
+            `SELECT individuals.*, 
+                MIN(sightings.sighting) AS first_sighting,
+                MAX(sightings.sighting) AS last_sighting,
+                COUNT(sightings.id) AS sighting_count
+            FROM individuals
+            LEFT JOIN sightings ON sightings.individual_id = individuals.id
+            GROUP BY individuals.id;`
+        );
         res.status(200).json(result.rows);
     } catch (error) {
         console.error('Error with getting all individual endangered animals.', error);
