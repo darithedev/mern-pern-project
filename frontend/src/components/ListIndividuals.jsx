@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import './ListIndividuals.css'
 import IndividualForm from './IndividualForm.jsx';
+import SightingForm from './SightingForm.jsx'
 
-const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
+const ListIndividuals = ({ updateScreen, speciesId, speciesName, setIndividualsSightings }) => {
     const [screen, setScreen] = useState("individuals");
     const [individuals, setIndividuals] = useState([]);
     const [filteredIndivs, setFilteredIndivs] = useState([]);
@@ -51,18 +52,26 @@ const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
                                 )
                             })}
                         </ul>
-                        <button id="add-button" onClick={() => setScreen("add")}>Add Individual</button>
+                        <button id="add-button" onClick={() => setScreen("addIndividual")}>Add Individual</button>
+                        <button id="add-button" onClick={() => setScreen("addSighting")}>Add Sighting</button>
                         <button onClick={() => updateScreen("species")}>Back</button>
                     </div>
                 </div>
             )}
 
-            {screen === "add" && (
+            {screen === "addIndividual" && (
                 <IndividualForm 
                     setScreen={setScreen}
                     speciesId={speciesId}
                     speciesName={speciesName}
                     fetchIndividuals={fetchIndividuals}
+                />
+            )}
+
+            {screen === "addSighting" && (
+                <SightingForm 
+                    setScreen={setScreen}
+                    filteredIndivs={filteredIndivs}
                 />
             )}
         </>
