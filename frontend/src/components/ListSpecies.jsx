@@ -29,21 +29,25 @@ const ListSpecies = () => {
     }, []);
 
     return (
-        <div className="species-container">
-            <h2>Endangered Species</h2>
-            <ul className="species-card" style={{ listStyle: "none" }}>
-                {species.map((specie) => {
-                    return (
-                        <li key={specie.id}>
-                            <h3>{specie.common_name}</h3>
-                            <p style={{ fontStyle: "italic" }}>{specie.scientific_name}</p>
-                            <p>Estimated Mature Individuals: {specie.estimated_in_the_wild}</p>
-                            <p>{codes.find((c) => c.code === specie.conservation_code).label}: {specie.conservation_code}</p>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
+        <>
+            {screen === "species" && (
+                <div className="species-container">
+                    <h2>Endangered Species</h2>
+                    <ul className="species-card">
+                        {species.map((specie) => {
+                            return (
+                                <li key={specie.id} onClick={() => onClickSpecies(specie)}>
+                                    <h3>{specie.common_name}</h3>
+                                    <p style={{ fontStyle: "italic" }}>{specie.scientific_name}</p>
+                                    <p>Estimated Mature Individuals: {specie.estimated_in_the_wild}</p>
+                                    <p>{codes.find((c) => c.code === specie.conservation_code).label}: {specie.conservation_code}</p>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+            )}
+        </>
     )
 }
 
