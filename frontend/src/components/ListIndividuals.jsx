@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react'
 
-const ListIndividuals = () => {
+const ListIndividuals = ({ speciesId }) => {
     const [individuals, setIndividuals] = useState([]);
-    const [sightings, setSightings] = useState([]);
+    const [filteredIndivs, setFilteredIndivs] = useState([]);
+    // const [sightings, setSightings] = useState([]);
 
     const fetchIndividuals = () => {
         fetch("http://localhost:8080/api/individuals")
         .then((response) => response.json())
         .then((individualAnimals) => {
           setIndividuals(individualAnimals);
+          const indivs = individualAnimals.filter((i) => i.species_id === parseInt(speciesId));
+          setFilteredIndivs(indivs);
         });
     };
 
@@ -23,7 +26,7 @@ const ListIndividuals = () => {
 
     useEffect(() => {
         fetchIndividuals();
-    }, []);
+    }, [speciesId]);
     
     return (
         <div className="individual-container">
