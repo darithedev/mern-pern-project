@@ -7,7 +7,6 @@ const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
     const [screen, setScreen] = useState("individuals");
     const [individuals, setIndividuals] = useState([]);
     const [filteredIndivs, setFilteredIndivs] = useState([]);
-    // const [sightings, setSightings] = useState([]);
 
     const fetchIndividuals = () => {
         fetch("http://localhost:8080/api/individuals")
@@ -18,15 +17,6 @@ const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
           setFilteredIndivs(indivs);
         });
     };
-
-    // Likely ot be moved to its own component ListSighting.jsx
-    /*const fetchSightings = () => {
-        fetch("http://localhost:8080/api/sightings")
-        .then((response) => response.json())
-        .then((individualSightings) => {
-          setSightings(individualSightings);
-        });
-    };*/
 
     useEffect(() => {
         fetchIndividuals();
