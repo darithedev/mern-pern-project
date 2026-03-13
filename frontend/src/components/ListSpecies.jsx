@@ -57,8 +57,10 @@ const ListSpecies = () => {
 
             {screen === "individuals" && (
                 <div>
-                    <ListIndividuals 
-                        speciesId={selectedSpecie.id} 
+                    <ListIndividuals
+                        updateScreen={setScreen}
+                        speciesId={selectedSpecie.id}
+                        speciesName={selectedSpecie.common_name} 
                     />
                 </div>
             )}
