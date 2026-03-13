@@ -24,6 +24,12 @@ const ListSpecies = () => {
         });
     };
 
+    const [selectedSpecie, setSelectedSpecie] = useState();
+    const onClickSpecies = (specie) => {
+        setSelectedSpecie(specie);
+        setScreen("individuals");
+    };
+
     useEffect(() => {
         fetchSpecies();
     }, []);
