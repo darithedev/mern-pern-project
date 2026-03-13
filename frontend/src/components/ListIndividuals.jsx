@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './ListIndividuals.css'
+import IndividualForm from './IndividualForm.jsx';
 
 const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
     const [screen, setScreen] = useState("individuals");
@@ -54,7 +55,15 @@ const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
                         <button onClick={() => updateScreen("species")}>Back</button>
                     </div>
                 </div>
-            )};
+            )}
+
+            {screen === "add" && (
+                <IndividualForm 
+                    setScreen={setScreen}
+                    speciesId={speciesId}
+                    speciesName={speciesName}
+                />
+            )}
         </>
     )
 }
