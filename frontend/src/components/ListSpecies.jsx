@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import './ListSPecies.css'
 import ListIndividuals from './ListIndividuals.jsx';
+import ListSightings from './ListSightings.jsx';
 
 const ListSpecies = () => {
     const [screen, setScreen] = useState("species");
     const [species, setSpecies] = useState([]);
+    
     const codes = [
         { code: "EX", label: "Extinct" },
         { code: "EW", label: "Extinct in the Wild" },
@@ -52,6 +54,7 @@ const ListSpecies = () => {
                             )
                         })}
                     </ul>
+                    <button onClick={() => setScreen("sightings")}>List All Sightings</button>
                 </div>
             )}
 
@@ -60,7 +63,15 @@ const ListSpecies = () => {
                     <ListIndividuals
                         updateScreen={setScreen}
                         speciesId={selectedSpecie.id}
-                        speciesName={selectedSpecie.common_name} 
+                        speciesName={selectedSpecie.common_name}
+                    />
+                </div>
+            )}
+
+            {screen === "sightings" && (
+                <div>
+                    <ListSightings
+                        updateScreen={setScreen}
                     />
                 </div>
             )}
