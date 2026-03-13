@@ -71,6 +71,7 @@ const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
             {screen === "addSighting" && (
                 <SightingForm 
                     setScreen={setScreen}
+                    speciesId={speciesId}
                     filteredIndivs={filteredIndivs}
                 />
             )}
