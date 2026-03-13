@@ -2,9 +2,29 @@ import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
 const IndividualForm = ({ setScreen, speciesId, speciesName }) => {
+    
+    const [individual, setIndividual] = useState({
+        nick_name: "",
+        scientist_tracking: "",
+        species_id: speciesId,
+    });
 
-    const handleSubmit = () => {
+    const handleNickname = (event) => {
+        const nick_name = event.target.value;
+        setIndividual((nickName) => ({ ...nickName, nick_name }));
+    };
 
+    const handleScientistTracking = (event) => {
+        const scientist_tracking = event.target.value;
+        setIndividual((scientistName) => ({ ...scientistName, scientist_tracking}));
+    };
+
+    const clearForm = () => {
+        setIndividual({ nick_name: "", scientist_tracking: "", species_id: speciesId });
+    }
+
+    const goBack = () => {
+        setScreen("individuals");
     }
 
     return (
