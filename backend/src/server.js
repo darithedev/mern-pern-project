@@ -1,38 +1,39 @@
 import express from 'express'
 import cors from 'cors'
 import pool from './db/pools.js'
+import dbHealth from './helpers/dbHealth.js';
+import router from './routes/index.js'
 
 const app = express();
 
 const PORT = process.env.PORT;
 
-// Middleware for checking database health
-const dbHealth = async (req, res, next) => {
-    try {
-        await pool.query('SELECT 1');
-        next();
-    } catch (error) {
-        res.status(503).json({ 
-            message: 'Express server is healthy. Postgres database connection is down.',
-            server: 'up', 
-            database: 'down',
-            error: error.message 
-        });
-    }
-}
-
 app.use(express.json());
 app.use(cors());
-app.use(dbHealth)
+app.use('/api', router);
 
-app.get('/', async (req, res) => {
-    res.status(200).json({ 
-        message: 'Express server is healthy. Postgres database connection is healthy.',
-        server: 'up',
-        database: 'up'
-    });
+app.get('/health', async (req, res) => {
+    const db_status = await dbHealth();
+    if (db_status) {
+        res.status(200).json({ 
+            message: 'Express server is healthy. Postgres database connection is healthy.',
+            server: 'up',
+            database: 'up'
+        });
+    } else {
+        res.status(500).json({ 
+            message: 'Express server is healthy. Postgres database connection is down.',
+            server: 'up',
+            database: 'down'
+        });
+    }
 });
 
-app.listen(PORT, '127.0.0.1', () => {
-    console.log(`Express server is running on port ${PORT}`);
+app.listen(PORT, '127.0.0.1', async () => {
+    if (await dbHealth()) {
+        console.log(`Express server is running on port ${PORT}`);
+    } else {
+        console.error('Error! The database is down. Restart database and server.');
+        process.exit(1);
+    }
 });
