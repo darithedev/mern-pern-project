@@ -145,6 +145,9 @@ const SightingForm = ({ setScreen, speciesId, filteredIndivs }) => {
                 <Button type="button" variant="outline=warning" onClick={clearForm}>
                     Reset
                 </Button>
+                <Button type="button" variant="outline=warning" onClick={goBack}>
+                    Back
+                </Button>
             </Form.Group>
         </Form>
     )
