@@ -36,8 +36,8 @@ const ListIndividuals = ({ updateScreen, speciesId, speciesName }) => {
                                         <h3>{individual.nick_name}</h3>
                                         <p>Tracked by: {individual.scientist_tracking}</p>
                                         <p>Total Sightings: {individual.sighting_count}</p>
-                                        <p>First Sighting: {individual.first_sighting ? individual.first_sighting : "No Sightings"}</p>
-                                        <p>Last Sighting: {individual.last_sighting ? individual.last_sighting : "No Sightings"}</p>
+                                        <p>First Sighting: {individual.first_sighting ? new Date(individual.first_sighting).toLocaleDateString() : "No Sightings"}</p>
+                                        <p>Last Sighting: {individual.last_sighting ? new Date(individual.last_sighting).toLocaleDateString() : "No Sightings"}</p>
                                     </li>
                                 )
                             })}
