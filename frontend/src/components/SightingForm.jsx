@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import dateFormat from '../helpers/dateFormat';
+import './SightingForm.css'
 
 const SightingForm = ({ setScreen, speciesId, filteredIndivs }) => {
     

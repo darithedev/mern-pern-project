@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
+import './IndividualForm.css'
 
 const IndividualForm = ({ setScreen, speciesId, speciesName, fetchIndividuals }) => {
     
