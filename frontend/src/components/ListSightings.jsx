@@ -4,13 +4,30 @@ import * as IoIcons from 'react-icons/io5'
 
 const ListSightings = ({ updateScreen }) => {
     const [sightings, setSightings] = useState([]);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
 
-    const fetchSightings = () => {
-      fetch("http://localhost:8080/api/sightings")
-        .then((response) => response.json())
-        .then((individualSightings) => {
-          setSightings(individualSightings);
+    const fetchSightings = (start, end) => {
+        const url = start && end
+            ? `http://localhost:8080/api/sightings?start=${start}&end=${end}`
+            : "http://localhost:8080/api/sightings";
+
+        fetch(url)
+            .then((response) => response.json())
+            .then((individualSightings) => {
+            setSightings(individualSightings);
         });
+    };
+
+    const onSearch = (e) => {
+        e.preventDefault();
+        fetchSightings(startDate, endDate);
+    };
+
+    const clearForm = () => {
+        setStartDate("");
+        setEndDate("");
+        fetchSightings();
     };
 
     const putSighting = (sighting) => {
@@ -44,6 +61,24 @@ const ListSightings = ({ updateScreen }) => {
     return (
         <div className="list-sightings-container">
             <h2>Animals Tracked Sightings</h2>
+            <form onSubmit={onSearch}>
+                <label>Start Date: </label>
+                <input
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                />
+                
+                <label>End Date: </label>
+                <input
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                />
+                
+                <button type="submit">Search</button>
+                <button type="button" onClick={clearForm}>Clear</button>
+            </form>
             <ul className="sighting-card">
                 {sightings.map((sighting) => {
                     return (
