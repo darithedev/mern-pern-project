@@ -2,8 +2,7 @@
 
 This project is an Animal Sighting Tracker connecting a React + Vite frontend, Express + Node.js backend, and a PostgreSQL database. It tracks endangered species, individual named animals within each species, and sighting events logged by scientists.
 
-<!-- Add a screenshot of your app here -->
-<!-- <img width="515" height="414" alt="Screenshot of project" src="./frontend/src/assets/project-demo.png" /> -->
+<img width="515" height="414" alt="Screenshot of project" src="./frontend/public/demo.gif" />
 
 ## Project Data Model
 
