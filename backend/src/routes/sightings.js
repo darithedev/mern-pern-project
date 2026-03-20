@@ -142,10 +142,10 @@ router.put('/:id', async (req, res) => {
             });
         };
 
-        res.status(201).json(result.rows[0]);
+        res.status(200).json(result.rows[0]);
     } catch (error) {
         console.error('This sighting could not be located or edited!', error.message)
-        res.status(500).json({ error: "Error! this sigting could not be located or edited!"})
+        res.status(500).json({ error: "Error! this sightings could not be located or edited!"})
     }
 });
 
@@ -175,7 +175,7 @@ router.delete('/:id', async (req, res) => {
             });
         };
 
-        res.status(201).json({ 
+        res.status(200).json({ 
             message: `The sighting for ${result.rows[0].nick_name} on date, ${result.rows[0].sighting.toDateString()} has been deleted.`
         });
 

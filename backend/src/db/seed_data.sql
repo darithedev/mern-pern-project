@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS sightings (
 
 -- load data to species table
 INSERT INTO species (common_name, scientific_name, estimated_in_the_wild, conservation_code) VALUES
-    ('Blue-Throated Macaw', 'Ara glaucogularis', 303, 'CE'),
-    ('Red Wolf', 'Canis rufus', 30, 'CE'),
+    ('Blue-Throated Macaw', 'Ara glaucogularis', 303, 'CR'),
+    ('Red Wolf', 'Canis rufus', 30, 'CR'),
     ('Andean Cat', 'Leopardus jacobita', 2177, 'EN'),
     ('Hawaiian Green Turtle', 'Chelonia mydas', 6550, 'LC'),
     ('Hooded Grebe', 'Podiceps gallardoi', 800, 'CR')

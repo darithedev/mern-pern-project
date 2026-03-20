@@ -1,0 +1,13 @@
+.sighting-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+}
+
+.sighting-card li {
+    border: 4px solid red;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+}

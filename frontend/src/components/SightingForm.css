@@ -1,0 +1,7 @@
+.form-sightings {
+    border: 4px solid red;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+    max-width: 500px;
+}
